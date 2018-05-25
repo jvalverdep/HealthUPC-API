@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+.vscode
+
+package-lock.json
+
+response_example.json
+
+config.json
+config.js

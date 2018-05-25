@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Routes</h1>
+
+<p>Rols</p>
+<pre><code>'1', 'Doctor'</code></pre>
+<pre><code>'2', 'Patient'</code></pre>
+
+
+<strong>Signin/strong>
+<p>/signin POST</p>
+<pre><code>
+    {
+        "email": "",
+        "password": ""
+    }
+</code></pre>
+<br />
+<strong>Medical Records</strong>
+<p>/medical_records/:id GET (id: medical_record_id)</p>
+<pre><code>
+    {
+        "id": 1,
+        "user_id": 1,
+        "birthday": "1995-09-30",
+        "height": "1.70",
+        "weight": "72.00",
+        "notes": "some notes for Daniela"
+    }
+</code></pre>
+<p>/medical_records POST</p>
+<pre><code>
+    {
+        "birthday": "1995-09-30",
+        "height": "1.70",
+        "weight": "72.0",
+        "notes": "some notes for Daniela",
+        "user_id": 1
+    }
+</code></pre>
+<br />
+<strong>Patients</strong>
+<p>/patients GET</p>
+<pre><code>
+    [{
+        "id": 1,
+        "first_name": "Daniela",
+        "last_name": "Fuller",
+        "email": "danibu@gmail.com",
+        "rol_id": 2,
+        "medical_record": {
+            "id": 1,
+            "user_id": 1,
+            "birthday": "1995-09-30",
+            "height": "1.70",
+            "weight": "72.00",
+            "notes": "some notes for Daniela"
+        },
+        "appointments": [
+            {
+                "id": 2,
+                "patient_id": 1,
+                "doctor_id": 2,
+                "height": null,
+                "weight": null,
+                "glucotest": null,
+                "scheduled": "2018-07-03T00:00:00.000Z",
+                "notes": "Some notes for appointment with patient_id =1, doctor_id=2",
+                "treatment": {
+                    "id": 3,
+                    "appointment_id": 2,
+                    "notes": "Some notes for appointment_id: 2",
+                    "treatment_details": [
+                        {
+                            "id": 1,
+                            "task": "Take 5 pills weekly in 2 weeks",
+                            "compliance": "0000000000",
+                            "frequency_id": 2,
+                            "treatment_id": 3,
+                            "frequency": {
+                                "id": 2,
+                                "frequency": "Weekly"
+                            }
+                        },
+                        {
+                            "id": 2,
+                            "task": "Take 10 pills weekly in 2 weeks",
+                            "compliance": "00000000000000000000",
+                            "frequency_id": 2,
+                            "treatment_id": 3,
+                            "frequency": {
+                                "id": 2,
+                                "frequency": "Weekly"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 1,
+                "patient_id": 1,
+                "doctor_id": 2,
+                "height": null,
+                "weight": null,
+                "glucotest": null,
+                "scheduled": "2018-05-30T00:00:00.000Z",
+                "notes": "Some notes for appointment with patient_id =1, doctor_id=2",
+                "treatment": {
+                    "id": 1,
+                    "appointment_id": 1,
+                    "notes": "Some notes for appointment_id: 1",
+                    "treatment_details": []
+                }
+            }
+        ]
+    }]
+</code></pre>
+<p>/patients/:id GET (id: user_id)</p>
+<pre><code>
+    {
+        "id": 1,
+        "first_name": "Daniela",
+        "last_name": "Fuller",
+        "email": "danibu@gmail.com",
+        "rol_id": 2,
+        "medical_record": {
+            "id": 1,
+            "user_id": 1,
+            "birthday": "1995-09-30",
+            "height": "1.70",
+            "weight": "72.00",
+            "notes": "some notes for Daniela"
+        },
+        "appointments": [
+            {
+                "id": 2,
+                "patient_id": 1,
+                "doctor_id": 2,
+                "height": null,
+                "weight": null,
+                "glucotest": null,
+                "scheduled": "2018-07-03T00:00:00.000Z",
+                "notes": "Some notes for appointment with patient_id =1, doctor_id=2",
+                "treatment": {
+                    "id": 3,
+                    "appointment_id": 2,
+                    "notes": "Some notes for appointment_id: 2",
+                    "treatment_details": [
+                        {
+                            "id": 1,
+                            "task": "Take 5 pills weekly in 2 weeks",
+                            "compliance": "0000000000",
+                            "frequency_id": 2,
+                            "treatment_id": 3,
+                            "frequency": {
+                                "id": 2,
+                                "frequency": "Weekly"
+                            }
+                        },
+                        {
+                            "id": 2,
+                            "task": "Take 10 pills weekly in 2 weeks",
+                            "compliance": "00000000000000000000",
+                            "frequency_id": 2,
+                            "treatment_id": 3,
+                            "frequency": {
+                                "id": 2,
+                                "frequency": "Weekly"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 1,
+                "patient_id": 1,
+                "doctor_id": 2,
+                "height": null,
+                "weight": null,
+                "glucotest": null,
+                "scheduled": "2018-05-30T00:00:00.000Z",
+                "notes": "Some notes for appointment with patient_id =1, doctor_id=2",
+                "treatment": {
+                    "id": 1,
+                    "appointment_id": 1,
+                    "notes": "Some notes for appointment_id: 1",
+                    "treatment_details": []
+                }
+            }
+        ]
+    }
+</code></pre>
+<br />
+<strong>Doctors</strong>
+<p>/doctors GET</p>
+<pre>
+    <code>
+        [
+            {
+                "first_name": "Javier",
+                "last_name": "Sotomayor",
+                "email": "jsotomayor@gmail.com",
+                "profession": null
+            }
+        ]
+    </code>
+</pre>
+<p>/doctors/:id GET (id: user_id)</p>
+<pre><code>
+    {
+        "first_name": "Javier",
+        "last_name": "Sotomayor",
+        "email": "jsotomayor@gmail.com",
+        "profession": null
+    }
+</code></pre>
+<br />
+<strong>Appointments</strong>
+<p>/appointments/:id GET (id: appointment_id)</p>
+<pre>
+    <code>
+        {
+            "id": 1,
+            "patient_id": 1,
+            "doctor_id": 2,
+            "height": null,
+            "weight": null,
+            "glucotest": null,
+            "scheduled": "2018-05-30T00:00:00.000Z",
+            "notes": "Some notes for appointment with patient_id =1, doctor_id=2"
+        }
+    </code>
+</pre>
+<p>/appointments POST</p>
+<pre><code>
+    {
+        "patient_id": 1,
+        "doctor_id": 2,
+        "height": null,
+        "weight": null,
+        "glucotest": null,
+        "scheduled": "2018-07-03",
+        "notes": "Some notes for appointment with patient_id =1, doctor_id=2"
+    }
+</code></pre>
+<br />
+<strong>Treatments</strong>
+<p>/treatments POST</p>
+<pre>
+    <code>
+        {
+            "appointment_id": 2,
+            "notes": "Some notes for appointment_id: 2",
+            "treatment_details": [
+                {
+                    "task": "Take 5 pills weekly in 2 weeks",
+                    "frequency_id": 2
+                },
+                {
+                    "task": "Take 10 pills weekly in 2 weeks",
+                    "frequency_id": 2
+                }
+            ]
+        }
+    </code>
+</pre>
+<p>/treatments/:id GET (id: treatments_id)</p>
+<pre><code>
+    {
+        "id": 3,
+        "appointment_id": 2,
+        "notes": "Some notes for appointment_id: 2",
+        "treatment_details": [
+            {
+                "id": 1,
+                "task": "Take 5 pills weekly in 2 weeks",
+                "compliance": "0000000000",
+                "frequency_id": 2,
+                "treatment_id": 3,
+                "frequency": {
+                    "id": 2,
+                    "frequency": "Weekly"
+                }
+            },
+            {
+                "id": 2,
+                "task": "Take 10 pills weekly in 2 weeks",
+                "compliance": "00000000000000000000",
+                "frequency_id": 2,
+                "treatment_id": 3,
+                "frequency": {
+                    "id": 2,
+                    "frequency": "Weekly"
+                }
+            }
+        ]
+    }
+</code></pre>
+</body>
+</html>
