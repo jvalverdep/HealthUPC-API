@@ -24,6 +24,10 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.DATE,
             allowNull: false
         },
+        reason: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
         notes: {
             type: Sequelize.TEXT,
             allowNull: true

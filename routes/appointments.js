@@ -26,7 +26,7 @@ module.exports = function(app) {
             const Op = db.Sequelize.Op;
             const appointmentId = req.params.id;
             db.appointment.findById(appointmentId, {
-                attributes: [ 'id', 'patient_id', 'doctor_id', 'height', 'weight', 'glucotest', 'scheduled', 'notes' ]
+                attributes: [ 'id', 'patient_id', 'doctor_id', 'height', 'weight', 'glucotest', 'scheduled', 'reason', 'notes' ]
             })
                 .then(appointment => {
                     if (!appointment) {
