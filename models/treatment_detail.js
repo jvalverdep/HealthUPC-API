@@ -13,6 +13,7 @@ module.exports = function(sequelize, Sequelize) {
     treatment_detail.associate = function(models) {
         models.treatment_detail.belongsTo(models.treatment);
         models.treatment_detail.belongsTo(models.frequency);
+        models.treatment_detail.belongsTo(models.route);
     }
     return treatment_detail;
 }

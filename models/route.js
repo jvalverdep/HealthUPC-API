@@ -1,7 +1,7 @@
 module.exports = function(sequelize, Sequelize) {
-    const frequency = sequelize.define('frequency', {
+    const route = sequelize.define('route', {
         abbreviation: {
-            type: Sequelize.STRING(10),
+            type: Sequelize.STRING(20),
             allowNull: false
         },
         definition: {
@@ -10,8 +10,8 @@ module.exports = function(sequelize, Sequelize) {
         }
     });
 
-    frequency.associate = function(models) {
-        models.frequency.hasMany(models.treatment_detail);
+    route.associate = function(models) {
+        models.route.hasMany(models.treatment_detail);
     }
-    return frequency;
+    return route;
 }
