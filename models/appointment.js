@@ -32,6 +32,7 @@ module.exports = function(sequelize, Sequelize) {
 
     appointment.associate = function(models) {
         models.appointment.hasOne(models.treatment, { onDelete: 'cascade', foreignKey: 'appointment_id' });
+        models.appointment.belongsTo(models.user, { as: 'doctor', foreignKey: 'doctor_id' } )
     }
     return appointment;
 }

@@ -47,7 +47,7 @@ module.exports = function(sequelize, Sequelize) {
     user.associate = function(models) {
         models.user.belongsTo(models.rol);
         models.user.hasOne(models.medical_record, { onDelete: 'cascade', foreignKey: 'user_id' });
-        models.user.hasMany(models.appointment, { as: 'appointments_with', onDelete: 'cascade', foreignKey: 'doctor_id' });
+        models.user.hasOne(models.appointment, { as: 'doctor', onDelete: 'cascade', foreignKey: 'doctor_id' });
         models.user.hasMany(models.appointment, { as: 'appointments', onDelete: 'cascade', foreignKey: 'patient_id' });
         models.user.hasMany(models.patient_test, { as: 'requested_for', onDelete: 'cascade', foreignKey: 'doctor_id' });
         models.user.hasMany(models.patient_test, { as: 'tests', asonDelete: 'cascade', foreignKey: 'patient_id' });
