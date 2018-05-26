@@ -58,7 +58,7 @@ module.exports = function(app) {
             db.treatment.findById(treatmentId, {
                 attributes: [ 'id', 'appointment_id', 'notes' ],
                         include: { model: db.treatment_detail, attributes: [ 'id', 'task', 'compliance', 'frequency_id', 'treatment_id' ],
-                            include: { model: db.frequency, attributes: [ 'id', 'frequency' ] }}
+                            include: [{ model: db.frequency, attributes: [ 'id', 'abbreviation', 'definition' ] }, { model: db.route, attributes: [ 'id', 'abbreviation', 'definition' ] }]}
             })
                 .then(medicalRecord => {
                     if (!medicalRecord) {
