@@ -20,7 +20,6 @@ module.exports = function(app) {
         res.render('index.html')
     });
     app.post('/signin', requireSignin, (req, res, next) => {
-        console.log(req.user);
         res.status(200).json({ token: tokenForUser(req.user) });
     });
     app.route('/signup')

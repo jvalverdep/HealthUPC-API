@@ -4,7 +4,4 @@ node_modules
 
 package-lock.json
 
-response_example.json
-
-config.json
 config.js

@@ -14,8 +14,9 @@ module.exports = function(app) {
                 include: [{ 
                     model: db.medical_record, attributes: [ 'id', 'user_id', 'birthday', 'height', 'weight', 'notes' ]
                 }, { 
-                    model: db.appointment, as: 'appointments', attributes: [ 'id', 'patient_id', 'doctor_id', 'height', 'weight', 'glucotest', 'scheduled', 'reason', 'notes' ],
-                    include: [{ model: db.user, as: 'doctor', attributes: [ 'id', 'first_name', 'last_name', 'email', 'profession' ] },
+                    model: db.appointment, as: 'appointments', attributes: [ 'id', 'patient_id', 'dot', 'height', 'weight', 'glucotest', 'reason', 'notes' ],
+                    include: [
+                        { model: db.doctor_operation_time },
                         { model: db.treatment, attributes: [ 'id', 'appointment_id', 'notes' ],
                         include: { model: db.treatment_detail, attributes: [ 'id', 'task', 'compliance', 'frequency_id', 'treatment_id' ],
                             include: [{ model: db.frequency, attributes: [ 'id', 'abbreviation', 'definition' ]}, { model: db.route, attributes: [ 'id', 'abbreviation', 'definition' ]} ]}}]
@@ -43,8 +44,9 @@ module.exports = function(app) {
                 include: [{ 
                     model: db.medical_record, attributes: [ 'id', 'user_id', 'birthday', 'height', 'weight', 'notes' ]
                 }, { 
-                    model: db.appointment, as: 'appointments', attributes: [ 'id', 'patient_id', 'doctor_id', 'height', 'weight', 'glucotest', 'scheduled', 'reason', 'notes' ],
-                    include: [{ model: db.user, as: 'doctor', attributes: [ 'id', 'first_name', 'last_name', 'email', 'profession' ]},
+                    model: db.appointment, as: 'appointments', attributes: [ 'id', 'patient_id', 'dot', 'height', 'weight', 'glucotest', 'reason', 'notes' ],
+                    include: [
+                        { model: db.doctor_operation_time },
                         { model: db.treatment, attributes: [ 'id', 'appointment_id', 'notes' ],
                         include: { model: db.treatment_detail, attributes: [ 'id', 'task', 'compliance', 'frequency_id', 'treatment_id' ],
                             include: [{ model: db.frequency, attributes: [ 'id', 'abbreviation', 'definition' ]}, { model: db.route, attributes: [ 'id', 'abbreviation', 'definition' ]} ]}}]

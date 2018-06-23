@@ -4,10 +4,6 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.INTEGER,
             allowNull: true
         },
-        doctor_id: {
-            type: Sequelize.INTEGER,
-            allowNull: true
-        },
         height: {
             type: Sequelize.DECIMAL(3,2),
             allowNull: true
@@ -19,10 +15,6 @@ module.exports = function(sequelize, Sequelize) {
         glucotest: {
             type: Sequelize.DECIMAL(5,2),
             allowNull: true
-        },
-        scheduled: {
-            type: Sequelize.DATE,
-            allowNull: false
         },
         reason: {
             type: Sequelize.STRING,
@@ -36,7 +28,7 @@ module.exports = function(sequelize, Sequelize) {
 
     appointment.associate = function(models) {
         models.appointment.hasOne(models.treatment, { onDelete: 'cascade', foreignKey: 'appointment_id' });
-        models.appointment.belongsTo(models.user, { as: 'doctor', foreignKey: 'doctor_id' } )
+        models.appointment.belongsTo(models.doctor_operation_time, { onDelete: 'cascade', foreignKey: 'dot' });
     }
     return appointment;
 }
