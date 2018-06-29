@@ -59,7 +59,7 @@ module.exports = function(app) {
                 return res.status(200).json(patient);
             })
             .catch(error => {
-                return next(error);
+                return res.send({'error': error.message });
             })
         })
 }
