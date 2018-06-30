@@ -74,21 +74,20 @@ module.exports = function(app) {
                     return next(error);
                 })
         })
-        // .put(async (req, res) => {
-        //     const db = req.app.db;
-        //     const Op = db.Sequelize.Op;
-        //     const consultationId = req.params.cId;
-        //     if (!isInt(consultationId)) {
-        //         res.status(400).json({'error': 'Not integer'});
-        //         return;
-        //     }
-        //     const consultation = req.body;
-        //     db.consultation.update(consultation, { where: { id: { [Op.eq]: consultationId }}})
-        //         .then(consultation => {
-        //             res.status(200).json(consultation);
-        //         })
-        //         .catch(error => {
-        //             res.json({ 'error': `Couldn\'t update. ${error}` });
-        //         });
-        // })
+        .put(async (req, res) => {
+            const db = req.app.db;
+            const Op = db.Sequelize.Op;
+            const appointmentId = req.params.id;
+            const appointment = req.body;
+
+            db.appointment.update(appointment, { where: { id: { [Op.eq]: appointmentId }}})
+                .then(updated => {
+                    if (updated) {
+                        return res.status(200).json({ 'status': 'OK', 'message': 'success' });
+                    }
+                })
+                .catch(error => {
+                    return res.json({ 'error': `Couldn\'t update. ${error}` });
+                });
+        })
 }
