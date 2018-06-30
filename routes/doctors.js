@@ -8,14 +8,14 @@ function isInt(value) {
 function parser(json) {
     let newObject = {};
     Object.keys(json).forEach(key => {
-      const newKeys = key.split(".");
-      const lastKey = newKeys.pop();
-      let pointer = newObject;
-      newKeys.forEach(newKey => {
-        if (typeof pointer[newKey] !== "object") pointer[newKey] = {};
-        pointer = pointer[newKey];
-      });
-      pointer[lastKey] = json[key];
+        const newKeys = key.split(".");
+        const lastKey = newKeys.pop();
+        let pointer = newObject;
+        newKeys.forEach(newKey => {
+            if (typeof pointer[newKey] !== "object") pointer[newKey] = {};
+            pointer = pointer[newKey];
+        });
+        pointer[lastKey] = json[key];
     });
     return newObject;
 }
