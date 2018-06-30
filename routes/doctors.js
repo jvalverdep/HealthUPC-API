@@ -91,7 +91,8 @@ module.exports = function(app) {
             })
                       
         });
-    app.route('/doctors/:id')
+
+    app.route('/doctors/:id/appointments')
         .get(async (req, res, next) => {
             const db = req.app.db;
             const sequelize = db.sequelize;
@@ -116,4 +117,29 @@ module.exports = function(app) {
 
         })
     
+        app.route('/doctors/:id')
+        .get(async (req, res, next) => {
+            const db = req.app.db;
+            const Op = db.Sequelize.Op;
+            const doctorId = req.params.id;
+            if (!isInt(doctorId)) {
+                next();
+                return;
+            }
+            db.user.findOne({ 
+                attributes: [ 'id', 'first_name', 'last_name', 'email', 'profession' ],
+                include: { model: db.operation_time, as: 'operation_times' },
+                where: { id: { [Op.eq]: doctorId }, rol_id: { [Op.eq]: '1' }}
+            })
+            .then(doctor => {
+                if (!doctor) {
+                    return res.status(404).json({ 'error': 'Doctor not found' })
+                }
+                return res.status(200).json(doctor);
+            })
+            .catch(error => {
+                return next(error);
+            })
+
+        })
 }
