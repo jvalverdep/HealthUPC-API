@@ -8,6 +8,9 @@ module.exports = function(sequelize, Sequelize) {
     }, {
         timestamps: false
     });
-    
+    doctor_operation_time.associate = function(models) {
+        models.doctor_operation_time.belongsTo(models.user, {  as: 'doctor', onDelete: 'cascade', foreignKey: 'doctor_id' });
+    }
+
     return doctor_operation_time;
 }
