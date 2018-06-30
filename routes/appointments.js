@@ -29,7 +29,15 @@ module.exports = function(app) {
                         }})
                             .spread((newAppointment, created) => {
                                 if (created) {
-                                    return res.status(201).json(newAppointment);
+                                    db.doctor_operation_time.update({ available: 0}, { where: { id: { [Op.eq]: appointment.dot }}})
+                                    .then(updated => {
+                                        if (updated) {
+                                            return res.status(201).json(newAppointment);
+                                        }
+                                    })
+                                    .catch(error => {
+                                        res.json({ 'error': `Couldn\'t update. ${error}` });
+                                    });
                                 } else {
                                     return res.status(200).json({ 'error': 'This appointment already exists.' });
                                 }

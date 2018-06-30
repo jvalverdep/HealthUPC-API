@@ -4,6 +4,11 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
+        },
+        available: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
         }
     }, {
         timestamps: false
