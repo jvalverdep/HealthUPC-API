@@ -90,4 +90,30 @@ module.exports = function(app) {
                     return res.json({ 'error': `Couldn\'t update. ${error}` });
                 });
         })
+        .delete(async (req, res) => {
+            const db = req.app.db;
+            const Op = db.Sequelize.Op;
+            const appointmentId = req.params.id;
+            const appointment = req.body;
+
+            db.appointment.findById(appointmentId)
+                .then(async appointmentdb => {
+                    if (appointmentdb) {
+                        let dot = appointmentdb.dot;
+                        await appointmentdb.destroy();
+                        db.doctor_operation_time.update({ available: true }, { where: { id: { [Op.eq]: dot }}})
+                            .then(updated => {
+                                if (updated) {
+                                    return res.status(200).json({ 'status': 'OK', 'message': 'success' });
+                                }
+                            })
+                            .catch(error => {
+                                return res.json({ 'error': `Couldn\'t complete. ${error}` });
+                            });
+                    } else {
+                        return res.json({ 'error': 'Appointment doesn\'t exists.' });
+                    }
+                    
+                })
+        })
 }
